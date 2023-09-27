@@ -1,0 +1,302 @@
+.game{
+	position: relative;
+	margin: 20px auto;
+	width: 1000px;
+	height: 700px;
+	background-color: skyblue;
+}
+
+.watter{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 200px;
+	background-image: url('images/sea.png');
+	background-size: cover;
+	z-index: 6;
+}
+
+.ship{
+	position: absolute;
+	width: 300px;
+    height: 359px;
+    top: 200px;
+    left: 645px;
+	background-image: url('images/ship.png');
+	background-size: cover;
+	z-index: 3;
+}
+
+.dock{
+	position: absolute;
+	width: 628px;
+    height: 70px;
+    top: 440px;
+    left: 0px;
+	background-image: url('images/dock.png');
+	background-size: cover;
+}
+
+.track{
+	position: absolute;
+	width: 400px;
+    height: 90px;
+    top: 346px;
+    left: 0px;
+	background-image: url('images/12.png');
+	background-size: cover;
+	z-index: 5;
+}
+
+.wheel{
+	position: absolute;
+	width: 32px;
+    height: 32px;
+    top: 62px;
+    left: 500px;
+	background-image: url('images/whell.png');
+	background-size: cover;
+	
+}
+
+.m-r{
+	animation: rotation 1s infinite linear;
+}
+
+.m-l{
+	animation: rotation-r 1s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation-r {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+
+.w-1{
+	left: 9px;
+}
+
+.w-2{
+	left: 148px;
+}
+
+.w-3{
+	left: 182px;
+}
+
+.w-4{
+	left: 323px;
+}
+
+.w-5{
+	left: 356px;
+}
+
+.container{
+	position: absolute;
+    width: 215px;
+    height: 82px;
+    top: 325px;
+    left: 159px;
+	background-image: url('images/container1.png');
+	background-size: cover;
+	display: none;
+}
+
+.rels{
+	position: absolute;
+	width: 400px;
+    height: 20px;
+    top: 421px;
+    left: 180px;
+	background-image: url('images/rels.png');
+	background-size: cover;
+}
+
+.kran{
+	position: absolute;
+	width: 558px;
+    height: 359px;
+    top: 50px;
+    left: 369px;
+	background-image: url('images/kran.png');
+	background-size: cover;
+	z-index: 4;
+}
+
+.wheel-k{
+	position: absolute;
+	width: 32px;
+    height: 32px;
+    top: 340px;
+	background-image: url('images/treinwhell.png');
+	background-size: cover;
+}
+
+.wk-1{
+	left: 66px;
+}
+
+.wk-2{
+	left: 138px;
+}
+
+.kkr{
+	position: absolute;
+	width: 32px;
+    height: 36px;
+    left: 289px;
+    top: 90px;
+	background-image: url('images/kkr.png');
+	background-size: cover;
+}
+
+.row{
+	position: absolute;
+	top: 3px;
+	height: 32px;
+	width: 2px;
+	background-image: url(images/tk.png);
+	background-size: contain;
+}
+
+.r1{
+	left: 9px;
+}
+
+.r2{
+	left: 22px;
+}
+
+.plt{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 2px;
+	background-color: black;
+}
+
+
+.ship-cont{
+	position: absolute;
+	width: 146px;
+    height: 58px;
+	background-image: url('images/container1.png');
+	background-size: cover;
+	z-index: 4;
+	display: none;
+	text-align: center;
+	line-height: 50px;
+	font-size: 30px;
+}
+
+/*top: 165px;
+left: 2px;*/
+
+.cont-sh-1{
+	top: 165px;
+	left: 2px;
+}
+
+.cont-sh-2{
+	top: 107px;
+	left: 2px;
+}
+
+.cont-sh-3{
+	top: 49px;
+	left: 2px;
+}
+
+.cont-sh-4{
+	top: 165px;
+	left: 150px;
+}
+
+.cont-sh-5{
+	top: 107px;
+	left: 150px;
+}
+
+.cont-sh-6{
+	top: 49px;
+	left: 150px;
+}
+
+.count-6 .cont-sh-1, .count-6 .cont-sh-4, .count-6 .cont-sh-2, .count-6 .cont-sh-5, .count-6 .cont-sh-3, .count-6 .cont-sh-6{
+	display: block;
+}
+
+.count-5 .cont-sh-1, .count-5 .cont-sh-4, .count-5 .cont-sh-2, .count-5 .cont-sh-5, .count-5 .cont-sh-3{
+	display: block;
+}
+
+.count-4 .cont-sh-1, .count-4 .cont-sh-4, .count-4 .cont-sh-2, .count-4 .cont-sh-5{
+	display: block;
+}
+
+.count-3 .cont-sh-1, .count-3 .cont-sh-4, .count-3 .cont-sh-2{
+	display: block;
+}
+
+.count-2 .cont-sh-1, .count-2 .cont-sh-4{
+	display: block;
+}
+
+.count-1 .cont-sh-1{
+	display: block;
+}
+
+.cont-sh-1::after{
+	content: '1';
+	color: white;
+}
+
+.cont-sh-2::after{
+	content: '2';
+	color: red;
+}
+
+.cont-sh-3::after{
+	content: '3';
+	color: green;
+}
+
+.cont-sh-4::after{
+	content: '4';
+	color: yellow;
+}
+
+.cont-sh-5::after{
+	content: '5';
+	color: orange;
+}
+
+.cont-sh-6::after{
+	content: '6';
+	color: goldenrod;
+}
+
+.ship-under{
+	width: 100%;
+	height: 163px;
+	background-image: url('images/ship_under.png');
+	background-size: cover;
+	bottom: 0px;
+	position: absolute;
+	z-index: 8;
+}
