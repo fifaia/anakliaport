@@ -18,10 +18,13 @@ var container = {
 	'weight': 500,
 	'color': 'red',
 	'price': 100,
+	'possition': [0, 0],
+	'rotationPos': 0,
+	'deviation': ''
 }
 
 var ship = {
-	'containerCount': 5,
+	'containerCount': 2,
 	'color': 'red',
 	'time': 20000,
 	'liveTime': 20000,

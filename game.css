@@ -108,12 +108,15 @@
 
 .container{
 	position: absolute;
-    width: 215px;
-    height: 82px;
-    top: 325px;
-    left: 159px;
+	width: 146px;
+    height: 58px;
 	background-image: url('images/container1.png');
 	background-size: cover;
+	z-index: 4;
+	text-align: center;
+	line-height: 50px;
+	font-size: 30px;
+	top: 0px;
 	display: none;
 }
 
@@ -237,23 +240,23 @@ left: 2px;*/
 	left: 150px;
 }
 
-.count-6 .cont-sh-1, .count-6 .cont-sh-4, .count-6 .cont-sh-2, .count-6 .cont-sh-5, .count-6 .cont-sh-3, .count-6 .cont-sh-6{
+.count-6 .cont-sh-1, .count-6 .cont-sh-2, .count-6 .cont-sh-3, .count-6 .cont-sh-4, .count-6 .cont-sh-5, .count-6 .cont-sh-6{
 	display: block;
 }
 
-.count-5 .cont-sh-1, .count-5 .cont-sh-4, .count-5 .cont-sh-2, .count-5 .cont-sh-5, .count-5 .cont-sh-3{
+.count-5 .cont-sh-1, .count-5 .cont-sh-2, .count-5 .cont-sh-3, .count-5 .cont-sh-4, .count-5 .cont-sh-5{
 	display: block;
 }
 
-.count-4 .cont-sh-1, .count-4 .cont-sh-4, .count-4 .cont-sh-2, .count-4 .cont-sh-5{
+.count-4 .cont-sh-1, .count-4 .cont-sh-2, .count-4 .cont-sh-3, .count-4 .cont-sh-4{
 	display: block;
 }
 
-.count-3 .cont-sh-1, .count-3 .cont-sh-4, .count-3 .cont-sh-2{
+.count-3 .cont-sh-1, .count-3 .cont-sh-3, .count-3 .cont-sh-2{
 	display: block;
 }
 
-.count-2 .cont-sh-1, .count-2 .cont-sh-4{
+.count-2 .cont-sh-1, .count-2 .cont-sh-2{
 	display: block;
 }
 
