@@ -14,17 +14,37 @@ function carMove() {
 		$('.wheel').removeClass('m-l')
 	}
 
-	if (car.direction == 1 && car.left > -404) {
-		car.left-=5;
-	}else if (car.direction == -1 && car.left < 150) {
-		car.left+=5;
+	if (car.direction == 1) {
+		if (car.left > -404) {
+			car.isMove = true
+			car.left-=5;
+			car.isReadyForLoad = false
+			if (car.isLoaded) {
+				conteinerMove([container.possition[0], container.possition[1]-=5])
+			}
+		}else{
+			car.direction = 0;
+			car.isReadyForLoad = true
+			car.isLoaded = false
+			car.isMove = false
+		}
+	}else if (car.direction == -1) {
+		if (car.left < 80) {
+			car.isMove = true
+			car.left+=5;
+			car.isReadyForLoad = true
+		}else{
+			car.direction = 0;
+			car.isMove = false
+		}
+		
 	}
 
 
 	$('.track').css('left', `${car.left}px`)
 }
 
-function carMove(a) {
+function carMoveAction(a) {
 	car.direction = a;
 }
 
@@ -60,7 +80,8 @@ function logKey(e) {
 	if (e.key === 'e') {downE()}
 	if (e.key === 's') {downS()}
 	if (e.key === 'w') {downW()}
-	if (e.code === 'Space') {getConteiner()}
+	if (e.key === 'f') {downF()}
+	if (e.code === 'Space') {getAndDropConteiner()}
 }
 
 
@@ -94,6 +115,13 @@ function downW() {
 	console.log(kran.kranAnchorTop)
 }
 
+function downF() {
+	if (!car.isMove) {
+		carMoveAction(trackMove)
+		trackMove = trackMove * -1;
+	}
+}
+
 function drawShip() {
 	$('.ship').removeClass().addClass(`ship count-${ship.containerCount}`)
 }
@@ -108,7 +136,8 @@ function moveKran() {
 			
 		}
 		kran.possitionLeft-=5
-		conteinerMove([container.possition[0], container.possition[1]-=5])
+		if (!kran.isFree) {conteinerMove([container.possition[0], container.possition[1]-=5])}
+		
 		logs();
 	}else if (kran.direction == -1 && kran.possitionLeft < 420) {
 		if (!$('.wheel-k').hasClass("m-r")) {
@@ -116,7 +145,7 @@ function moveKran() {
 			$('.wheel-k').addClass('m-r')	
 		}
 		kran.possitionLeft+=5;
-		conteinerMove([container.possition[0], container.possition[1]+=5])
+		if (!kran.isFree) {conteinerMove([container.possition[0], container.possition[1]+=5])}
 		logs();
 	}else if (kran.direction == 0) {
 		$('.wheel-k').removeClass('m-r')
@@ -126,22 +155,22 @@ function moveKran() {
 	// console.log(kran.kranAnchorLeft)
 	if (kran.directionAnchor == 1 && kran.kranAnchorLeft > 152) {
 		kran.kranAnchorLeft-=5
-		conteinerMove([container.possition[0], container.possition[1]-=5])
+		if (!kran.isFree) {conteinerMove([container.possition[0], container.possition[1]-=5])}
 		logs();
 	}else if (kran.directionAnchor == -1 && kran.kranAnchorLeft < 531) {
 		kran.kranAnchorLeft+=5
-		conteinerMove([container.possition[0], container.possition[1]+=5])
+		if (!kran.isFree) {conteinerMove([container.possition[0], container.possition[1]+=5])}
 		logs();
 	}
 
 	//anchor top
 	if (kran.directionAnchorTop == 1 && kran.kranAnchorTop > 0) {
 		kran.kranAnchorTop-=5
-		conteinerMove([container.possition[0]-=5, container.possition[1]])
+		if (!kran.isFree) {conteinerMove([container.possition[0]-=5, container.possition[1]])}
 		logs();
 	}else if (kran.directionAnchorTop == -1 && kran.kranAnchorTop < 205) {
 		kran.kranAnchorTop+=5
-		conteinerMove([container.possition[0]+=5, container.possition[1]])
+		if (!kran.isFree) {conteinerMove([container.possition[0]+=5, container.possition[1]])}
 		logs();
 	}
 
@@ -154,105 +183,117 @@ function moveKran() {
 
 }
 
-function getConteiner() {
-	switch(ship.containerCount){
-		case 1:
-			if (kran.kranAnchorTop === 190) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [364, 647])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
-					addConteinerInGame('right', [364, 647])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
-					console.log('aigo')
-					addConteinerInGame('', [364, 647])
+function getAndDropConteiner() {
+	if (kran.isFree) {
+		switch(ship.containerCount){
+			case 1:
+				if (kran.kranAnchorTop === 190) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [364, 647])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
+						addConteinerInGame('right', [364, 647])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
+						console.log('aigo')
+						addConteinerInGame('', [364, 647])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
-		case 2:
-			if (kran.kranAnchorTop === 135) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [307, 647])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
-					addConteinerInGame('right', [307, 647])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
-					console.log('aigo')
-					addConteinerInGame('', [307, 647])
+				break;
+			case 2:
+				if (kran.kranAnchorTop === 135) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [307, 647])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
+						addConteinerInGame('right', [307, 647])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
+						console.log('aigo')
+						addConteinerInGame('', [307, 647])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
-		case 3:
-			if (kran.kranAnchorTop === 75) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [249, 647])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
-					addConteinerInGame('right', [249, 647])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
-					console.log('aigo')
-					addConteinerInGame('', [249, 647])
+				break;
+			case 3:
+				if (kran.kranAnchorTop === 75) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 696) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [249, 647])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 709) {
+						addConteinerInGame('right', [249, 647])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 696 && kran.possitionLeft + kran.kranAnchorLeft <= 709){
+						console.log('aigo')
+						addConteinerInGame('', [249, 647])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
-		case 4:
-			if (kran.kranAnchorTop === 190) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [364, 795])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
-					addConteinerInGame('right', [364, 795])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
-					console.log('aigo')
-					addConteinerInGame('', [364, 795])
+				break;
+			case 4:
+				if (kran.kranAnchorTop === 190) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [364, 795])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
+						addConteinerInGame('right', [364, 795])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
+						console.log('aigo')
+						addConteinerInGame('', [364, 795])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
-		case 5:
-			if (kran.kranAnchorTop === 135) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [307, 795])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
-					addConteinerInGame('right', [307, 795])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
-					console.log('aigo')
-					addConteinerInGame('', [307, 795])
+				break;
+			case 5:
+				if (kran.kranAnchorTop === 135) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [307, 795])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
+						addConteinerInGame('right', [307, 795])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
+						console.log('aigo')
+						addConteinerInGame('', [307, 795])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
-		case 6:
-			if (kran.kranAnchorTop === 75) {
-				if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
-					console.log('marcxena gadaxra')
-					addConteinerInGame('left', [249, 795])
-				}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
-					addConteinerInGame('right', [249, 795])
-					console.log('marjvena gadaxra')
-				}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
-					console.log('aigo')
-					addConteinerInGame('', [249, 795])
+				break;
+			case 6:
+				if (kran.kranAnchorTop === 75) {
+					if (kran.possitionLeft + kran.kranAnchorLeft < 842) {
+						console.log('marcxena gadaxra')
+						addConteinerInGame('left', [249, 795])
+					}else if (kran.possitionLeft + kran.kranAnchorLeft > 857) {
+						addConteinerInGame('right', [249, 795])
+						console.log('marjvena gadaxra')
+					}else if (kran.possitionLeft + kran.kranAnchorLeft >= 842 && kran.possitionLeft + kran.kranAnchorLeft <= 857){
+						console.log('aigo')
+						addConteinerInGame('', [249, 795])
+					}
+				}else{
+					console.log('ver aigo')
 				}
-			}else{
-				console.log('ver aigo')
-			}
-			break;
+				break;
+		}
+	}else{
+		if (container.possition[1] > 222 && container.possition[1] < 332 && kran.kranAnchorTop == 175 && car.isReadyForLoad && !car.isLoaded) {
+			kran.isFree = true;
+			car.isLoaded = true;
+		}else{
+			conteinerDropSpace();
+		}
+		
+		console.log('dagdeba')
 	}
+	
 }
 
 function addConteinerInGame(deviation = '', pos) {
@@ -271,7 +312,14 @@ function conteinerMove(pos) {
 }
 
 function conteinerDropDow() {
-	if (kran.possitionLeft + kran.kranAnchorLeft < 550 && !kran.isFree) {
+	if (kran.possitionLeft + kran.kranAnchorLeft < 550 && !kran.isFree && container.deviation !== '') {
+		kran.isFree = true;
+		conteinerAnimation = 1;
+	}
+}
+
+function conteinerDropSpace() {
+	if (!kran.isFree) {
 		kran.isFree = true;
 		conteinerAnimation = 1;
 	}
@@ -291,6 +339,11 @@ function animationConteiner() {
 			container.possition[1]+=4
 			console.log('modis 2')
 			conteinerMove([container.possition[0], container.possition[1]])
+		}else{
+			$('.container').css('transform', `rotate(${container.rotationPos+=5}deg)`)
+			container.possition[0]+=12
+			console.log('modis 3')
+			conteinerMove([container.possition[0], container.possition[1]])
 		}
 
 		if (container.possition[0] > 600) {
@@ -307,4 +360,9 @@ function animationConteiner() {
 
 }
 
+function loadTrack() {
+	// body...
+}
+
+let trackMove = -1;
 let conteinerAnimation = 0;

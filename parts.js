@@ -39,5 +39,6 @@ var car = {
 	'isMove': false,
 	'speed': 0,
 	'direction': 0,
+	'isReadyForLoad': false,
 	'left': -404
 }
