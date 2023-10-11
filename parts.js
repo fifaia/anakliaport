@@ -24,7 +24,7 @@ var container = {
 }
 
 var ship = {
-	'containerCount': 2,
+	'containerCount': 5,
 	'color': 'red',
 	'time': 20000,
 	'liveTime': 20000,

@@ -308,7 +308,7 @@ left: 2px;*/
 
 .help{
 	position: absolute;
-	background-color: red;
+	background-color: #a39a9ae0;
 	top: 90px;
     left: 10px;
     width: 340px;
@@ -317,5 +317,10 @@ left: 2px;*/
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: stretch;
+}
+
+.text{
+	margin-left: 11px;
+	margin-top: 1px;
 }
